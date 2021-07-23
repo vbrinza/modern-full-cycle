@@ -1,0 +1,42 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: demo-webapp-selfsigned
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: selfsigned-cert
+spec:
+  commonName: "demo-webapp.website"
+  dnsNames:
+    - "demo-webapp.website"
+  secretName: selfsigned-cert-tls
+  issuerRef:
+    name: demo-webapp-selfsigned
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-webapp
+  annotations:
+    # use the shared ingress-nginx
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+  - hosts:
+    - "demo-webapp.website"
+    secretName: tls-secret
+  rules:
+  - host: "demo-webapp.website"
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: my-juice-shop
+            port:
+              number: 3000

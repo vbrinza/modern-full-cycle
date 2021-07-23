@@ -7,7 +7,7 @@ The setup is going to be done on a local computer (with macOS in this case) with
 In a cloud environment the steps will differ.
 A production grade system will require a different approach especially in the persistence and the stored secrets security areas.
 
-##Technical stack:
+## Technical stack:
 1. Kubernetes (the last version installed by minikube)
 2. Helm 3
 3. Nginx Ingress Controller

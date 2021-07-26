@@ -1,0 +1,2 @@
+config:
+  deployer:isMinikube: "True"

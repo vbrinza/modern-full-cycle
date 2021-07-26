@@ -12,8 +12,19 @@ A production grade system will require a different approach especially in the pe
 2. Helm 3
 3. Nginx Ingress Controller
 4. Prometheus
-5. Grafana 
+5. Grafana
+6. Python 3
+7. Pulumi
 
+## Automation
+Automation is done with a custom tool based on Python and Pulumi.
+```bash
+cd deployer
+pip3 install -r requirements.txt
+python3 main.py --help # To find out all the possible options
+python3 main.py provision-cluster # To provision the local cluster 
+python3 main.py provision-stack # To provision the application stack
+```
 ## Install a Kubernetes cluster on the local machine
 To install a Kubernetes cluster on a macOS machine, perform the following steps:
 ```bash
@@ -100,17 +111,17 @@ minikube service grafana-np
 ### Setup Prometheus data source in Grafana.
 For the Grafana to pull the Prometheus metrics, they have to be connected together.
 It's done as see in the Figure 1.1
-![alt text](prometheus_data_source.png)
+![alt text](images/prometheus_data_source.png)
 Figure 1.1
 
 ### Setup the Kubernetes dashboard into the Grafana
 Figure 1.2 shows how the community version of the Kubernetes dashboard can be loaded.
-![alt text](grafana_dash_1.png)
+![alt text](images/grafana_dash_1.png)
 
 In the Figure 1.3 can be seen how it is imported and in the Figure 1.4 it can be seen how it looks.
-![alt text](grafana_dash_2.png)
+![alt text](images/grafana_dash_2.png)
 Figure 1.3 
-![alt text](kube_cl_dash.png)
+![alt text](images/kube_cl_dash.png)
 Figure 1.4
 
 The JuiceBox app Grafana dashboard is added differently.
@@ -119,18 +130,18 @@ I've got the `grafana-dashboard.json` file from the official repo with
 wget https://raw.githubusercontent.com/bkimminich/juice-shop/master/monitoring/grafana-dashboard.json # Download the Grafana dashboard for Juice shop
 ```
 The 'Upload JSON file' button will be used in this case, as seen in the Figure 1.5
-![alt text](grafana_dash_3.png)
+![alt text](images/grafana_dash_3.png)
 Figure 1.5
 
 After the `grafana-dashboard.json` file from my local computer was imported, I've got the state as seen in the Figure 1.6
-![alt text](grafana_dash_4.png)
+![alt text](images/grafana_dash_4.png)
 Figure 1.6
 
 The Figure 1.7 and 1.8 show how the Juice box dashboard is looking.
-![alt text](web_app_dash1.png)
+![alt text](images/web_app_dash1.png)
 Figure 1.7
 
-![alt text](web_app_dash2.png)
+![alt text](images/web_app_dash2.png)
 Figure 1.8
 
 # In the next series
